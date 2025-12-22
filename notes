@@ -1,0 +1,14 @@
+ts-node ko lagi js or ts sensitive
+tsx ko lai chai farak pardaina
+
+For using ts-node:
+
+1. Install nodemon
+2. In script, "dev": "nodemon server.ts"
+3. In tsconfig.json, "allowImportingTsExtentions": true and "noEmit": true
+4. In script, to just run "start": "ts-node --transpile-only server.ts"
+5. OR, first npm build then ts-node dist/server.js
+
+For using tsx:
+
+1. In script, "dev": "tsx --watch server.ts"
