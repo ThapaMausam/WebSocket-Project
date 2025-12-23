@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Status, type ITodo } from "./todoTypes.ts";
+import {Status, type ITodo } from "./todoTypes.ts";
 
 const todoSchema = new mongoose.Schema<ITodo>({
     task: {
@@ -15,4 +15,4 @@ const todoSchema = new mongoose.Schema<ITodo>({
     }
 })
 
-export const Todo = mongoose.model("Todo", todoSchema)
+export const todoModel = mongoose.model("Todo", todoSchema)

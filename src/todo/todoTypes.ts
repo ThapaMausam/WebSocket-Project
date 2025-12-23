@@ -3,8 +3,9 @@ export enum Status {
     Pending = "pending"
 }
 
+
 export interface ITodo {
-    task: String;
-    deadline: String;
-    status: Status
+    task: string;
+    deadline: string;
+    status: Status | undefined
 }

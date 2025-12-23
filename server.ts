@@ -9,6 +9,8 @@ import { envConfig } from './src/config/config.ts'
 import connectToDb from './src/config/dbConfig.ts'
 import { Server } from 'socket.io'
 
+let io:Server | undefined
+
 function startServer() {
 
     connectToDb()
@@ -19,21 +21,31 @@ function startServer() {
         console.log(`Server has started on port ${port}`)
     })
 
-    const io = new Server(server, {
-        cors: {
-            origin: "http://localhost:5173" // This is for client-server architecture but not needed for mono-architecture such as express and ejs
-        }
-    })
+    // const io = new Server(server, {
+    //     cors: {
+    //         origin: "http://localhost:5173" // This is for client-server architecture but not needed for mono-architecture such as express and ejs
+    //     }
+    // })
 
-    io.on("connection", (socket) => {
-        socket.on("send", (data) => {
-            console.log(data)
-            socket.emit("receive", {
-                "message": "Task Received"
-            })
-        })
-        console.log("Someone Connected (Client)")
-    })
+    // io.on("connection", (socket) => {
+    //     socket.on("send", (data) => {
+    //         console.log(data)
+    //         socket.emit("receive", {
+    //             "message": "Task Received"
+    //         })
+    //     })
+    //     console.log("Someone Connected (Client)")
+    // })
+
+    io = new Server(server)
+}
+
+export default function getSocketIo() {
+    if (!io) {
+        throw new Error("SocketIO not initialized.")
+    } else {
+        return io;
+    }
 }
 
 startServer()
