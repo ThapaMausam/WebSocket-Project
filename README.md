@@ -4,7 +4,6 @@ A collaborative, real-time task management application. By utilizing WebSockets,
 
 <div align="center">
   <img src="./assets/system-screenshot.png" alt="App Screenshot" width="800">
-  <p><em>(Replace the path above with your actual screenshot or GIF)</em></p>
 </div>
 
 ---
@@ -18,10 +17,8 @@ A collaborative, real-time task management application. By utilizing WebSockets,
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML5, CSS3, JavaScript (Vanilla)
-- **Backend:** Node.js with Express
-- **Real-time Engine:** [Socket.io / Native WebSockets]
-- **Styling:** CSS Flexbox/Grid
+- **Frontend:** React, TypeScript, Tailwind CSS, Vite
+- **Backend:** Node.js, Express, Socket.IO
 
 ## 📦 Installation & Local Setup
 
