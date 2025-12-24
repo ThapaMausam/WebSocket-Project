@@ -56,6 +56,11 @@ return (
           <TodoList todos={todos} />
         </div>
       </div>
+
+              {/* Footer / Branding */}
+        <div className="mt-8 text-center text-xs text-gray-400">
+          Created by Mausam Thapa
+        </div>
     </div>
   );
 
