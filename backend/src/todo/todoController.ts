@@ -1,14 +1,12 @@
 import type { Socket } from "socket.io";
-import getSocketIo from "../../server.ts";
+import { io } from "../../server.ts";
 import { todoModel } from "./todoModel.ts";
 import { Status, type ITodo } from "./todoTypes.ts";
 
 class Todo {
 
-    private io = getSocketIo()
-
-    constructor() {
-        this.io.on("connection", (socket:Socket) => {
+    public init() {
+            io.on("connection", (socket:Socket) => {
             console.log(`New client connected: ${socket.id}`);
 
             // Add-Todo
@@ -47,11 +45,7 @@ class Todo {
                 status
             })
 
-            const todos = await todoModel.find({status: Status.Pending})
-            socket.emit("todo-updated", {
-                status: "success",
-                data: todos
-            })
+            this.getPendingTodos(socket)
         } catch (error) {
             socket.emit("todo-response", {
                 status: "error",
@@ -78,11 +72,7 @@ class Todo {
                 return
             }
 
-            const todos = await todoModel.find({status: Status.Pending})
-            socket.emit("todo-updated", {
-                    status: "success",
-                    data: todos
-            })
+            this.getPendingTodos(socket)
         } catch (error) {
             socket.emit("todo-response", {
                 status: "error",
@@ -110,12 +100,7 @@ class Todo {
                 return
             }
 
-            const todos = await todoModel.find({status: Status.Pending})
-
-            socket.emit("todo-updated", {
-                status: "success",
-                data: todos
-            })
+            this.getPendingTodos(socket)
         } catch (error) {
             socket.emit("todo-response", {
                 status: "error",
@@ -127,7 +112,7 @@ class Todo {
     private async getPendingTodos(socket:Socket) {
         try {
             const todos = await todoModel.find({status: Status.Pending})
-            socket.emit("todo-updated", {
+            io.emit("todo-updated", {
                 status: "success",
                 data: todos
             })
@@ -140,4 +125,5 @@ class Todo {
     }
 }
 
-export default new Todo()
+const todo = new Todo()
+export default todo
